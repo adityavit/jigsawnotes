@@ -40,4 +40,8 @@ public class User extends Model {
         this.save();
     }
     
+    public static User getUser(String userName){
+        return find("byUserName",userName).first();
+    }
+    
 }

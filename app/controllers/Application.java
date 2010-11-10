@@ -15,7 +15,12 @@ public class Application extends Controller {
         render();
     }
     
-    public static void deskScreen(User user){
+    public static void deskScreen(){
+        String userName = session.get("user");
+        User user = User.getUser(userName);
+        if(user == null){
+            System.out.println("user object present");
+        }
         render(user);
     }
 
