@@ -11,7 +11,7 @@ public class UserController extends Controller {
         if(user != null){
             session.put("user", user);
             flash.success("Welcome, ", user.userName);
-            Application.index();
+            Application.deskScreen(user);
             //render("@Application.deskScreen",user);
         }else{
             flash.error("Login Failed");
