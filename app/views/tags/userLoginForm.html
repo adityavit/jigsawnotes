@@ -1,0 +1,19 @@
+<div id="userLoginForm">
+#{form @UserController.login(), id:'formLogin'}
+<p class="field">
+    <label>
+        Username/Email id:
+    </label>
+    <input type="text" name="userNameOrEmail" size="19" value="${flash.username}" />
+</p>
+<p class="field">
+    <label>
+        Password:
+    </label>
+    <input type="password" name="password" size="19"/>
+</p>
+<p class="buttons">
+    <input type="submit" value="Go To My Desk" />
+</p>
+#{/form}
+</div>
