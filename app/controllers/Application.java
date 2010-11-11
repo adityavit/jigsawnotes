@@ -6,11 +6,6 @@ import models.*;
 
 public class Application extends Controller {
 
-    @Before
-    static void bootStrapApp(){
-        User newUser = new User("demo","demo","demo");
-        newUser.persistNewUser();
-    }
     public static void index() {
         render();
     }

@@ -1,0 +1,18 @@
+# Users
+
+models.User(demo):
+    email:          demo@demo.com
+    password:       demo
+    userName:       demo
+    
+models.Desk(secondDesk):
+    deskName:       Demo Second Desk
+    deskUser:       demo
+    
+models.Note(secondDeskNote):
+    title:         Second Desk Note Title
+    noteBody:      Second Desk Note Body
+    noteTimeStamp: 2009-06-14
+    noteDesk:      secondDesk
+    
+    
