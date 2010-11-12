@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title:'JigSawNotes' /}
+
+   #{if user.desks != null}
+   #{list user.desks, as:'desk'}
+   <tr>
+   <td>${desk.deskName}</td></tr>
+   <br/>
+   <tr>
+   <td>${desk.deskDescription}</td>
+   </tr>
+   <br/>
+   <tr>
+   	#{if desk.notes != null}
+   	#{list desk.notes, as:'note'}
+	<td>${note.title}</td></tr>
+   <br/>	
+	<td>${note.noteBody}</td>
+	<td>${note.noteTimeStamp}</td>
+   </tr>
+   #{/list}
+   #{/if}
+   #{/list}
+   #{/if}
