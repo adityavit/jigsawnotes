@@ -44,4 +44,8 @@ public class User extends Model {
         return find("byUserName",userName).first();
     }
     
+    public String toString(){
+        return "User("+this.userName+")";
+    }
+    
 }

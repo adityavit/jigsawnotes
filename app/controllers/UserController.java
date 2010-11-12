@@ -4,19 +4,24 @@ import play.mvc.Controller;
 import play.data.validation.Required;
 import models.*;
 
-public class UserController extends Controller {
+public class UserController extends Application {
     
     public static void login(String userNameOrEmail,String password){
         User user = User.validateUser(userNameOrEmail,password);
         if(user != null){
-            session.put("user", user.userName);
-            renderArgs.put("user", user);
+            session.put("userName", user.userName);
             flash.success("Welcome, ", user.userName);
-            Application.deskScreen();
+            DeskController.userDesk();
             //render("@Application.deskScreen",user);
         }else{
             flash.error("Login Failed");
             Application.index();
         }
     }
+    
+    public static void logout() {
+        session.clear();
+        Application.index();
+    }
+    
 }

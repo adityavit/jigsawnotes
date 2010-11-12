@@ -11,6 +11,16 @@
         #{get 'moreScripts' /}
     </head>
     <body>
+    <div id="header">
+            <h1>Jig Saw Notes</h1>
+            #{if user?.id}
+                <div id="options">
+                    Connected as ${user.userName}
+                    |
+                    <a href="@{UserController.logout()}">Logout</a>
+                </div>
+            #{/if}
+        </div>
         #{doLayout /}
     </body>
 </html>
