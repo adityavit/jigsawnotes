@@ -5,14 +5,28 @@ models.User(demo):
     password:       demo
     userName:       demo
     
+models.Desk(firstDesk):
+    deskName:       Demo First Desk
+    deskUser:       demo
+    
 models.Desk(secondDesk):
     deskName:       Demo Second Desk
     deskUser:       demo
     
+models.Note(firstDeskNote):
+    title:         First Desk Note Title
+    noteBody:      First Desk Note Body
+    noteTimeStamp: 2010-10-14
+    noteDesk:      firstDesk
+    
+models.Note(firstDeskSecondNote):
+    title:         First Desk Second Note Title
+    noteBody:      First Desk Second Note Body
+    noteTimeStamp: 2010-11-14
+    noteDesk:      firstDesk
+    
 models.Note(secondDeskNote):
     title:         Second Desk Note Title
     noteBody:      Second Desk Note Body
-    noteTimeStamp: 2009-06-14
-    noteDesk:      secondDesk
-    
-    
+    noteTimeStamp: 2010-11-15
+    noteDesk:      secondDesk    

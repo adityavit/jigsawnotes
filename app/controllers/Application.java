@@ -32,7 +32,11 @@ public class Application extends Controller {
     }
     
     public static void index() {
-        render();
+    	if(connected()==null){
+          render();
+    	}else{
+    	  DeskController.userDesk();
+    	}
     }
     
 

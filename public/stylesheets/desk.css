@@ -1,0 +1,33 @@
+.deskNote {
+    background-color: rgb(255, 240, 70);
+    height: 250px;
+    padding: 10px;
+    position: relative;
+    width: 200px;
+    -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.noteTimeStamp {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    font-size: 9px;
+    background-color: #db0;
+    color: white;
+    border-top: 1px solid #a80;
+    padding: 2px 4px;
+    text-align: right;
+}
+.noteCloseButton {
+    display: none;
+    background-image: url(/public/images/close.png);
+    height: 30px;
+    position: absolute;
+    left: -15px;
+    top: -15px;
+    width: 30px;
+}
+
+.deskNote:hover .noteCloseButton {
+    display: block;
+}

@@ -7,6 +7,9 @@ GET     /                                       Application.index
 GET     /desk                                   DeskController.userDesk
 POST    /login                                  UserController.login
 GET     /logout                                 UserController.logout
+POST    /register                               UserController.userRegister
+GET    /register                                UserController.userRegister
+
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

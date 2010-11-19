@@ -1,0 +1,39 @@
+<div id="userRegisterFormDiv">
+    #{form @UserController.userRegister(), id:'userRegisterForm'}
+    #{field 'user.userName'}
+    <p class="${field.errorClass}">
+        <label>
+            Username:
+        </label>
+        <input type="text" name="${field.name}" size="19" value="${user?.userName}" /><span class="error">${field.error}</span>
+    </p>
+    #{/field}
+    #{field 'user.email'}
+    <p class="${field.errorClass}">
+        <label>
+            Email Id:
+        </label>
+        <input type="text" name="${field.name}" size="19" value="${user?.email}" /><span class="error">${field.error}</span>
+    </p>
+    #{/field}
+    #{field 'user.password'}
+    <p class="${field.errorClass}">
+        <label>
+            Password:
+        </label>
+        <input type="password" name="${field.name}" size="19"/><span class="error">${field.error}</span>
+    </p>
+    #{/field}
+    #{field 'verifyPassword'}
+    <p class="${field.errorClass}">
+        <label>
+            Re Enter Your Password:
+        </label>
+        <input type="password" name="${field.name}" size="19"/><span class="error">${field.error}</span>
+    </p>
+    #{/field}
+    <p class="buttons">
+        <input type="submit" value="Register Me." /><a href="@{Application.index()}">Cancel</a>
+    </p>
+    #{/form}
+</div>

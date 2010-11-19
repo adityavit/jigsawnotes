@@ -1,24 +1,46 @@
 #{extends 'main.html' /}
 #{set title:'JigSawNotes' /}
+#{set 'moreStyles'}
+       <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/desk.css'}">
+#{/set}
 
+  <div class="userDesks" id="Desk_${user.userName}">
+     <div class="deskContainer" id="deskContainer">
+       #{if user.desks != null}
+       #{list user.desks, as:'desk'}
+      <span class="deskDetails" id="desk_${desk.id}">
+        <span class="deskName" id="deskName_${desk.id}">
+           ${desk.deskName}
+        </span>
+        <span class="deskDescription" id="deskDescription_${desk.id}">
+           ${desk.deskDescription}
+        </span>
+     </span>
+   #{/list}
+   #{/if}
+   </div>
    #{if user.desks != null}
    #{list user.desks, as:'desk'}
-   <tr>
-   <td>${desk.deskName}</td></tr>
-   <br/>
-   <tr>
-   <td>${desk.deskDescription}</td>
-   </tr>
-   <br/>
-   <tr>
-   	#{if desk.notes != null}
-   	#{list desk.notes, as:'note'}
-	<td>${note.title}</td></tr>
-   <br/>	
-	<td>${note.noteBody}</td>
-	<td>${note.noteTimeStamp}</td>
-   </tr>
+     <div class="deskNotes" id="Note_${desk.id}">
+       #{if desk.notes != null}
+   	   #{list desk.notes, as:'note'}
+   	    <div class="deskNote" id="noteContainer_${desk.id}_${note.id}">
+   	       <div class="noteHeader">
+   	 	      <span class="noteTitle" id="noteTitle_${desk.id}_${note.id}">
+   	 	        ${note.title}
+   	 	       </span>
+   	 	       <span class="noteCloseButton"></span>
+   	      </div>
+   	 	  <div class="noteBody" id="noteBody_${desk.id}_${note.id}">
+   	 	     ${note.noteBody}
+   	 	  </div>
+   	 	  <div class="noteTimeStamp" id="noteTimeStamp_${desk.id}_${note.id}">
+   	 	   Created at:- ${note.noteTimeStamp}
+   	 	  </div>
+   	  </div>
    #{/list}
    #{/if}
+   	</div>
    #{/list}
    #{/if}
+</div>
