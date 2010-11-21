@@ -14,6 +14,7 @@
 *.tar
 *.zip
 *war*
+
 # OS generated files #
 ######################
 .DS_Store?
@@ -26,12 +27,17 @@ Thumbs.db
 .settings/**
 eclipse/
 eclipse/**
+*.iml
+*.ipr
+*.iws
 
-# Logs and databases #
-######################
+# Logs and databases and server Config and test Results#
+########################################################
 *.log
 *.sql
 *.sqlite
-
+logs/**
 *tmp
 *log
+server.pid
+test-result/**
