@@ -19,9 +19,10 @@
    #{/list}
    #{/if}
    </div>
+   <div class="notesContainer">
    #{if user.desks != null}
    #{list user.desks, as:'desk'}
-     <div class="deskNotes" id="Note_${desk.id}">
+     <div class="deskNotes ${desk_isFirst?'selectedDesk':'nonSelectedDesk'}" id="Desk_${desk.id}">
        #{if desk.notes != null}
    	   #{list desk.notes, as:'note'}
    	    <div class="deskNote" id="noteContainer_${desk.id}_${note.id}">
@@ -43,4 +44,5 @@
    	</div>
    #{/list}
    #{/if}
+   </div>
 </div>

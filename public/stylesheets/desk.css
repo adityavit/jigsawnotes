@@ -31,3 +31,6 @@
 .deskNote:hover .noteCloseButton {
     display: block;
 }
+
+.nonSelectedDesk {
+	display: none;
