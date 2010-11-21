@@ -1,3 +1,6 @@
+* {
+	font-family:helvetica, Arial;
+}
 .deskNote {
     background-color: rgb(255, 240, 70);
     height: 250px;

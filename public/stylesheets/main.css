@@ -1,0 +1,26 @@
+#shell {
+	margin:auto;
+	width:850px
+}
+
+* {
+	font-family:helvetica, Arial;
+}
+
+#userLoginForm {
+	padding:5px;
+	width:250px;
+	float:right;
+}
+#userLoginForm label{
+	display:block;
+	padding-bottom:5px;
+}
+#content {
+  width:830px;
+}
+
+#intro-content {
+	float:left;
+	width:550px;
+}

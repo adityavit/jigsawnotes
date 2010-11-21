@@ -1,4 +1,6 @@
 <div id="userLoginForm">
+<fieldset>
+	<legend>Login</legend>
 #{form @UserController.login(), id:'formLogin'}
 <p class="field">
     <label>
@@ -16,4 +18,6 @@
     <input type="submit" value="Go To My Desk" />
 </p>
 #{/form}
+<a href="@{UserController.userRegister()}">Sign Me Up</a>
+</fieldset>
 </div>
