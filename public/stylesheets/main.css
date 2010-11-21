@@ -1,26 +1,27 @@
 #shell {
 	margin:auto;
-	width:850px
 }
 
 * {
 	font-family:helvetica, Arial;
 }
 
-#userLoginForm {
-	padding:5px;
-	width:250px;
-	float:right;
-}
-#userLoginForm label{
-	display:block;
-	padding-bottom:5px;
-}
+
 #content {
-  width:830px;
+
 }
 
-#intro-content {
+#options{
+	float:right;
+	margin-top: 5px;
+	margin-right:8px;
+}
+
+#header{
+	height:82px;
+	margin-left:8px;
+}
+
+#header h1{
 	float:left;
-	width:550px;
 }

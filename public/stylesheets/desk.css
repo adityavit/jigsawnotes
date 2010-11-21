@@ -26,14 +26,44 @@
     background-image: url(/public/images/close.png);
     height: 30px;
     position: absolute;
-    left: -15px;
-    top: -15px;
+    left: 210px;
+    top: 1px;
     width: 30px;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .deskNote:hover .noteCloseButton {
     display: block;
 }
 
-.nonSelectedDesk {
+.unSelectedNoteContainer {
 	display: none;
+}
+
+.deskContainer{
+	float:left;
+	width:20%;
+	height:100%;
+	border-right:1px solid #000000;
+}
+
+.notesContainer{
+	float:right;
+	width:79%;
+}
+.deskDescription{
+	display:none;
+}
+.userDesks{
+	margin-left:10px;
+	height:540px;
+}
+.selectedDesk{
+	font-size: large;
+	color:blue;
+}
+.deskDetails{
+	cursor: pointer;
+	margin-bottom:5px;
+}

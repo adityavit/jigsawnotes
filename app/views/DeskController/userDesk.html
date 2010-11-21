@@ -8,21 +8,21 @@
      <div class="deskContainer" id="deskContainer">
        #{if user.desks != null}
        #{list user.desks, as:'desk'}
-      <span class="deskDetails" id="desk_${desk.id}">
+      <div class="deskDetails ${desk_isFirst?'selectedDesk':'unSelectedDesk'}" id="desk_${desk.id}">
         <span class="deskName" id="deskName_${desk.id}">
            ${desk.deskName}
         </span>
         <span class="deskDescription" id="deskDescription_${desk.id}">
            ${desk.deskDescription}
         </span>
-     </span>
+     </div>
    #{/list}
    #{/if}
    </div>
-   <div class="notesContainer">
+   <div class="notesContainer" id="notesContainer">
    #{if user.desks != null}
    #{list user.desks, as:'desk'}
-     <div class="deskNotes ${desk_isFirst?'selectedDesk':'nonSelectedDesk'}" id="Desk_${desk.id}">
+     <div class="deskNotes ${desk_isFirst?'selectedNoteContainer':'unSelectedNoteContainer'}" id="Desk_${desk.id}">
        #{if desk.notes != null}
    	   #{list desk.notes, as:'note'}
    	    <div class="deskNote" id="noteContainer_${desk.id}_${note.id}">
