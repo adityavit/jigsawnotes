@@ -28,7 +28,7 @@ Note = function(){
    		
    	}
    	
-   	this.update(noteParam,noteId,deskObj){
+   	this.update = function(noteParam,noteId,deskObj){
    		this.m_noteId = noteId;
    		this.m_deskObj = deskObj;
    		this.m_noteTitle = noteParam["noteTitle"];

@@ -4,24 +4,13 @@
        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/desk.css'}">
 #{/set}
 #{set 'moreScripts'}
+       <script src="@{'/public/javascripts/userDeskController.js'}" type="text/javascript" charset="utf-8"></script>
        <script src="@{'/public/javascripts/deskContext.js'}" type="text/javascript" charset="utf-8"></script>
+       <script src="@{'/public/javascripts/NoteContext.js'}" type="text/javascript" charset="utf-8"></script>
+       <script src="@{'/public/javascripts/Desk.js'}" type="text/javascript" charset="utf-8"></script>
 #{/set}
 
   <div class="userDesks" id="Desk_${user.userName}">
-     <div class="deskContainer" id="deskContainer">
-       #{if user.desks != null}
-       #{list user.desks, as:'desk'}
-      <div class="deskDetails ${desk_isFirst?'selectedDesk':'unSelectedDesk'}" id="desk_${desk.id-1}">
-        <span class="deskName" id="deskName_${desk.id-1}">
-           ${desk.deskName}
-        </span>
-        <span class="deskDescription" id="deskDescription_${desk.id-1}">
-           ${desk.deskDescription}
-        </span>
-     </div>
-   #{/list}
-   #{/if}
-   </div>
    <div class="notesContainer" id="notesContainer">
    #{if user.desks != null}
    #{list user.desks, as:'desk'}
@@ -49,24 +38,33 @@
    #{/if}
    </div>
 </div>
+<div class="deskContainer" id="deskContainer">
+    <div id="deskContainerHeader">
+        <span id="deskContainerTitle"></span>
+        <span id="deskCounter"></span>
+    </div>
+    <div id="deskPanel">
+        <div class="deskItem deskItemTemplate">
+            <span class="deskName"></span>
+            <span class="deskDesc"></span>
+        </div>
+    </div>
+</div>
+<div class="notesContainer" id="notesContainer">
+</div>
 
-<script type="text/javascript">
-  var deskState = new Object();
-  deskState.desks = new Array();
-  #{if user.desks != null}
-  #{list user.desks, as:'desk'}
-  deskState.desks[${desk_index-1}] = new Object();
-  deskState.desks[${desk_index-1}]["deskName"] = "${desk.deskName}";
-  deskState.desks[${desk_index-1}]["deskDescription"] = "${desk.deskDescription}";
-  deskState.desks[${desk_index-1}]["deskNotes"] = new Array();
-  #{if desk.notes != null}
-  #{list desk.notes, as:'note'}
-  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}] = new Object();
-  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}]["noteTitle"] = "${note.title}";
-  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}]["noteBody"] = "${note.noteBody}";
-  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}]["noteTimeStamp"] = "${note.noteTimeStamp}";
-  #{/list}
-  #{/if}
-  #{/list}
-  #{/if}
+<div class="deskNote">
+    <div class="noteHeader">
+        <span class="noteCloseButton"></span>
+    </div>
+    <div class="noteBody">
+    </div>
+    <div class="noteTimeStamp">
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+    userDesk.init();
+    
+});
 </script>

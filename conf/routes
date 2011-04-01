@@ -5,8 +5,8 @@
 # Home page
 GET     /                                       Application.index
 GET     /desk                                   DeskController.userDesk
-GET     /userDesks                               DeskController.deskData
-GET     /deskNotes/{id}                               DeskController.deskNotesData
+GET     /userDesks.json                         DeskController.deskData
+GET     /deskNotes.json/{id}                    DeskController.deskNotesData
 POST    /login                                  UserController.login
 GET     /logout                                 UserController.logout
 POST    /register                               UserController.userRegister
