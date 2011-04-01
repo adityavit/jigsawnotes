@@ -16,13 +16,16 @@ NoteContext = function(initParams){
         $(document).bind(this.m_userDeskController.getEventName("updateNotes"), {
             subObj: this
         }, this.start);
+        $(document).bind(this.m_userDeskController.getEventName("switchUserDesk"), {
+            subObj: this
+        }, this.getNotesData);
     }
     
     this.start = function(event){
         event.data.subObj.updateNotesData();
     }
     
-    this.getNotesData = function(event){
+    this.getNotesData = function(event,deskObj){
         event.data.subObj.updateNotesData();
     }
     

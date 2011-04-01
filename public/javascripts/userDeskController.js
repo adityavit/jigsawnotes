@@ -32,8 +32,9 @@ userDeskController = function(){
     this.defineEvents = function(){
         this.m_events["updateDesk"] = "UpdateDeskEvent"; // Event to update the Desk.Listener deskContext.
         this.m_events["deskUpdated"] = "DeskUpdatedEvent"; // Event when the Desk of the User is Updated.
-        this.m_events["updateNotes"] = "UpdateCurrentDeskNotesEvent" //Event to update Notes for a currennt Desk.
-        this.m_events["notesUpdated"] = "CurrentDeskNotesUpdatedEvent" //Event when the Note of current Desk is updated.
+        this.m_events["updateNotes"] = "UpdateCurrentDeskNotesEvent"; //Event to update Notes for a currennt Desk.
+        this.m_events["notesUpdated"] = "CurrentDeskNotesUpdatedEvent"; //Event when the Note of current Desk is updated.
+        this.m_events["switchUserDesk"] = "SwitchUserDesk";// Event when a user selects a new desk through DeskUIWidget.
     }
     
     /**

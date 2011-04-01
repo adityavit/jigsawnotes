@@ -48,11 +48,28 @@ DeskUIWidget = function(initParams){
                 this.m_selectedDeskElem = deskElem;
             }
             deskElem.data("deskNumber", desk);
+            deskElem.bind('click',{
+                subObj: this
+            }, this.switchDesk);
             if (userDesks[desk]["deskName"]) 
                 deskElem.children(".deskName").text(userDesks[desk]["deskName"]);
             if (userDesks[desk]["deskDescription"]) 
                 deskElem.children(".deskDesc").text(userDesks[desk]["deskDescription"]);
             deskPanel.append(deskElem);
+        }
+    }
+    
+    this.switchDesk = function(event){
+        var clickedDeskNo = $(this).data("deskNumber");
+        var selectedDeskNo = event.data.subObj.m_deskContext.getSelectedDeskNumber();
+        if (selectedDeskNo != clickedDeskNo) {
+            event.data.subObj.m_selectedDeskElem.removeClass("selectedDesk");
+            $(this).addClass("selectedDesk");
+            event.data.subObj.m_selectedDeskElem = $(this);
+            jQuery.event.trigger(event.data.subObj.m_userDeskController.getEventName("switchUserDesk"),{"updatedDeskId":clickedDeskNo});
+        }
+        else {
+            return false;
         }
     }
     this.attachActions = function(){
