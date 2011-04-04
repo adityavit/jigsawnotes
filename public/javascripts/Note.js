@@ -1,40 +1,49 @@
-Note = function(){
-	
-	this.m_deskObj = null;
-	this.m_noteId = "";
-	
-	this.m_noteHeight = "";
-	
-	this.m_noteWidth = "";
-	
-	this.m_noteTop = "";
-	this.m_noteLeft = "";
-	
-	this.m_noteTitle = "";
-	
-	this.m_noteBody = "";
-	
-	this.m_noteTimeStamp = null;
-	
-	this.init = function(noteParam,noteId,deskObj){
-		if(initParams){
-			this.m_initParams = initParams;
-			this.m_deskId = initParams.deskId;
-			this.m_noteId = initParams.noteId;
-		}
-	}
-	
-   	this.createNote = function(){
-   		
-   	}
-   	
-   	this.update = function(noteParam,noteId,deskObj){
-   		this.m_noteId = noteId;
-   		this.m_deskObj = deskObj;
-   		this.m_noteTitle = noteParam["noteTitle"];
-   		this.m_noteBody = noteParam["noteBody"];
-   		this.m_noteTimeStamp = noteParam["noteTimeStamp"];
-   	}
-	
-	
+var NoteUIWidget = function(noteData, deskNo){
+    this.m_noteDataObj = noteData;
+    this.m_deskNo = deskNo;
+    this.m_initialUILoaded = false;
+    this.m_noteDomElement = null;
+    this.init = function(){
+        $(document).bind("updateNoteUIWidget" + this.m_deskNo, {
+            subObj: this
+        }, this.updateNoteWidget);
+        $(document).bind("hideNoteUIWidget" + this.m_deskNo, {
+            subObj: this
+        }, this.hideNoteWidget);
+    }
+    
+    this.updateNoteWidget = function(event){
+        event.data.subObj.loadUI();
+        event.data.subObj.refreshUI(); 
+        event.data.subObj.show();
+    }
+
+    this.loadUI = function(){
+        if (!this.m_initialUILoaded) {
+            this.m_noteDomElement = $('.noteItemTemplate').clone();
+            this.m_noteDomElement.removeClass('noteItemTemplate');
+            $('.notesContainer').append(this.m_noteDomElement);
+            if (this.m_noteDataObj["title"]) 
+                $(this.m_noteDomElement).children('.noteHeader').children('.noteTitle').text(this.m_noteDataObj["title"]);
+            if (this.m_noteDataObj["body"]) 
+                $(this.m_noteDomElement).children('.noteBody').text(this.m_noteDataObj["body"]);
+            if (this.m_noteDataObj["timeStamp"]) 
+                $(this.m_noteDomElement).children('.noteTimeStamp').text(this.m_noteDataObj["timeStamp"]);
+            this.m_initialUILoaded = true;
+        }
+    }
+    this.refreshUI = function(){
+    }
+    
+    this.hideNoteWidget = function(event){
+        event.data.subObj.hide();
+    }
+
+    this.hide = function(){
+       $(this.m_noteDomElement).addClass("hideNoteClass");
+    }
+    this.show = function(){
+       $(this.m_noteDomElement).removeClass("hideNoteClass");
+    }
+    this.init();
 }

@@ -19,6 +19,9 @@ NoteContext = function(initParams){
         $(document).bind(this.m_userDeskController.getEventName("switchUserDesk"), {
             subObj: this
         }, this.getNotesData);
+        $(document).bind(this.m_userDeskController.getEventName("noteUIInstancesUpdated"), {
+            subObj: this
+        }, this.updateNoteInstances);
     }
     
     this.start = function(event){
@@ -34,6 +37,7 @@ NoteContext = function(initParams){
         var currentDeskId = this.m_currentDesk["deskId"];
         if (this.m_deskNotes[currentDeskId]) {
             this.m_currentNotesData = this.m_deskNotes[currentDeskId];
+            jQuery.event.trigger(this.m_userDeskController.getEventName("notesUpdated"));
         }
         else {
             var notesurl = '/deskNotes.json/' + currentDeskId;
@@ -51,8 +55,20 @@ NoteContext = function(initParams){
         var notesData = notesObj["deskNotes"];
         if (!this.m_deskNotes[notesObjDeskId]) {
             this.m_deskNotes[notesObjDeskId] = notesData;
+        } 
+        var currentDeskId = this.m_currentDesk["deskId"];
+        if (currentDeskId == notesObjDeskId) {
+            this.m_currentNotesData = notesData;
         }
         jQuery.event.trigger(this.m_userDeskController.getEventName("notesUpdated"));
+    }
+
+    this.updateNoteInstances = function(event){
+       var selectedDeskNo = event.data.subObj.m_deskContext.getSelectedDeskNumber();
+       jQuery.event.trigger("updateNoteUIWidget"+selectedDeskNo);
+    }
+    this.selectedDeskNotesData = function(){
+        return this.m_currentNotesData;
     }
     
 }

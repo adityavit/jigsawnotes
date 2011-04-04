@@ -63,10 +63,11 @@ DeskUIWidget = function(initParams){
         var clickedDeskNo = $(this).data("deskNumber");
         var selectedDeskNo = event.data.subObj.m_deskContext.getSelectedDeskNumber();
         if (selectedDeskNo != clickedDeskNo) {
+            jQuery.event.trigger("hideNoteUIWidget"+selectedDeskNo);
             event.data.subObj.m_selectedDeskElem.removeClass("selectedDesk");
             $(this).addClass("selectedDesk");
             event.data.subObj.m_selectedDeskElem = $(this);
-            jQuery.event.trigger(event.data.subObj.m_userDeskController.getEventName("switchUserDesk"),{"updatedDeskId":clickedDeskNo});
+            jQuery.event.trigger(event.data.subObj.m_userDeskController.getEventName("switchUserDesk"),{"selectedDeskNo":clickedDeskNo});
         }
         else {
             return false;

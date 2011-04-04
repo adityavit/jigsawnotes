@@ -8,36 +8,10 @@
        <script src="@{'/public/javascripts/deskContext.js'}" type="text/javascript" charset="utf-8"></script>
        <script src="@{'/public/javascripts/NoteContext.js'}" type="text/javascript" charset="utf-8"></script>
        <script src="@{'/public/javascripts/Desk.js'}" type="text/javascript" charset="utf-8"></script>
+       <script src="@{'/public/javascripts/NotesController.js'}" type="text/javascript" charset="utf-8"></script>
+       <script src="@{'/public/javascripts/Note.js'}" type="text/javascript" charset="utf-8"></script>
 #{/set}
 
-  <div class="userDesks" id="Desk_${user.userName}">
-   <div class="notesContainer" id="notesContainer">
-   #{if user.desks != null}
-   #{list user.desks, as:'desk'}
-     <div class="deskNotes ${desk_isFirst?'selectedNoteContainer':'unSelectedNoteContainer'}" id="deskBlock_${desk.id-1}">
-       #{if desk.notes != null}
-   	   #{list desk.notes, as:'note'}
-   	    <div class="deskNote" id="noteContainer_${desk.id-1}_${note.id-1}">
-   	       <div class="noteHeader">
-   	 	      <span class="noteTitle" id="noteTitle_${desk.id-1}_${note.id-1}">
-   	 	        ${note.title}
-   	 	       </span>
-   	 	       <span class="noteCloseButton"></span>
-   	      </div>
-   	 	  <div class="noteBody" id="noteBody_${desk.id-1}_${note.id-1}">
-   	 	     ${note.noteBody}
-   	 	  </div>
-   	 	  <div class="noteTimeStamp" id="noteTimeStamp_${desk.id-1}_${note.id-1}">
-   	 	   Created at:- ${note.noteTimeStamp}
-   	 	  </div>
-   	  </div>
-   #{/list}
-   #{/if}
-   	</div>
-   #{/list}
-   #{/if}
-   </div>
-</div>
 <div class="deskContainer" id="deskContainer">
     <div id="deskContainerHeader">
         <span id="deskContainerTitle"></span>
@@ -50,16 +24,17 @@
         </div>
     </div>
 </div>
-<div class="notesContainer" id="notesContainer">
-</div>
 
-<div class="deskNote">
-    <div class="noteHeader">
-        <span class="noteCloseButton"></span>
-    </div>
-    <div class="noteBody">
-    </div>
-    <div class="noteTimeStamp">
+<div class="notesContainer" id="notesContainer">
+    <div class="deskNote noteItemTemplate">
+        <div class="noteHeader">
+            <span class="noteTitle" contenteditable="true"></span>
+            <span class="noteCloseButton"></span>
+        </div>
+        <div class="noteBody" contenteditable="true">
+        </div>
+        <div class="noteTimeStamp">
+        </div>
     </div>
 </div>
 <script>

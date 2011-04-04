@@ -1,4 +1,4 @@
-DeskContext = function(initParams){
+DeskContext = function deskContext(initParams){
     /**
      * Object to store the userDesk.
      */
@@ -9,7 +9,6 @@ DeskContext = function(initParams){
     this.m_userName = "";
     this.m_selectedDeskNumber = 0;
     
-    this.m_currentNote = null;
     
     this.init = function(userDeskController){
         this.m_userDeskController = userDeskController;
@@ -52,7 +51,9 @@ DeskContext = function(initParams){
     this.getSelectedDesk = function(){
         return this.m_userDesk[this.m_selectedDeskNumber];
     }
-    
+    this.getSelectedDeskId = function(){
+        return this.m_userDesk[this.m_selectedDeskNumber]["deskId"];
+    }
     this.getUserDesks = function(){
         return this.m_userDesk;
     }
@@ -62,6 +63,6 @@ DeskContext = function(initParams){
     }
     
     this.updatedSelectedDesk = function(event, deskObj){
-        event.data.subObj.m_selectedDeskNumber = deskObj["updatedDeskId"];
+        event.data.subObj.m_selectedDeskNumber = deskObj["selectedDeskNo"];
     }
 }

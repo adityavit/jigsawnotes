@@ -2,10 +2,11 @@
  * The UserDeskController Is the starting point of the application js framework.Used For Initializing all the Context
  * witgets.
  */
-userDeskController = function(){
+var userDesk = new (function(){
 
     this.deskContext = null;
     this.noteContext = null;
+    this.notesController = null;
     this.m_events = {};
     this.m_deskUpdated = false;
     this.m_noteUpdated = false;
@@ -16,9 +17,11 @@ userDeskController = function(){
         this.deskContext = new DeskContext();
         this.noteContext = new NoteContext();
         this.deskUIWidget = new DeskUIWidget();
+        this.notesController = new NotesController();
         this.deskContext.init(this);
         this.noteContext.init(this);
         this.deskUIWidget.init(this);
+        this.notesController.init(this);
         this.start();
     }
     
@@ -35,6 +38,7 @@ userDeskController = function(){
         this.m_events["updateNotes"] = "UpdateCurrentDeskNotesEvent"; //Event to update Notes for a currennt Desk.
         this.m_events["notesUpdated"] = "CurrentDeskNotesUpdatedEvent"; //Event when the Note of current Desk is updated.
         this.m_events["switchUserDesk"] = "SwitchUserDesk";// Event when a user selects a new desk through DeskUIWidget.
+        this.m_events["noteUIInstancesUpdated"] = "NotesUIInstancesUpdated";
     }
     
     /**
@@ -60,6 +64,5 @@ userDeskController = function(){
             subObj: this
         }, this.onDeskUpdate);
     }
-}
+})();
 
-var userDesk = new userDeskController();
