@@ -58,4 +58,21 @@ public class BasicTest extends UnitTest {
        assertEquals("Hi Testing Note Created Here",noteAdded.noteBody);
        
     }
+    
+    @Test
+    public void createNewUserDeskTest(){
+        User newUser = new User("adityavit@gmail.com","test","adityavit");
+        newUser.persistNewUser();
+        assertEquals(1, newUser.desks.size());
+    }
+    
+    @Test
+    public void createNewNoteTest(){
+        User newUser = new User("adityavit@gmail.com","test","adityavit");
+        newUser.persistNewUser();
+        assertEquals(0,newUser.desks.get(0).notes.size());
+        NoteJson notejson = newUser.desks.get(0).addNewDeskNote();
+        assertEquals("Number of Notes =1",1,newUser.desks.get(0).notes.size());
+        assertEquals(notejson.id,newUser.desks.get(0).notes.get(0).id.toString());
+    }
 }

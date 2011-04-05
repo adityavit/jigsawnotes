@@ -11,7 +11,7 @@ POST    /login                                  UserController.login
 GET     /logout                                 UserController.logout
 POST    /register                               UserController.userRegister
 GET    /register                                UserController.userRegister
-
+GET    /note/add.new/{id}                       NoteController.addNewNote
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

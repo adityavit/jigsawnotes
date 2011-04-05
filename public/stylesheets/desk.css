@@ -3,7 +3,7 @@
 }
 
 .deskNote {
-    background-color: rgb( 255, 240, 70 );
+    background: url("/public/images/note_corner.png") no-repeat scroll 100% 100% #FFFFE0;
     height: 250px;
     padding: 10px;
     position: relative;
@@ -30,7 +30,8 @@
 
 .noteCloseButton {
     display: none;
-    background-image: url(/public/images/close.png);
+    background-image: url(/public/images/actions.png);
+    background-position : -3px -160px;
     height: 30px;
     position: absolute;
     left: 210px;

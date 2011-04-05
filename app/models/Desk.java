@@ -34,6 +34,13 @@ public class Desk extends Model {
         this.save();
     }
     
+    public NoteJson addNewDeskNote(){
+        Note newNote = new Note(this);
+        this.notes.add(newNote);
+        this.save();
+        NoteJson newNoteJson = new NoteJson(newNote);
+        return newNoteJson;
+    }
     public Map getDeskNoteData(){
         Map <String,Object> deskNoteData = new HashMap();
         deskNoteData.put("deskId", this.id.toString());
