@@ -1,3 +1,4 @@
+Currently the application is under development and can be found at http://www.jigsawnotes.com Demo User name:-demo password:-demo
 JigsawNotes is an written on play framework.
 To store the daily common use sticky-notes on the cloud.
 Every Note is linked through a desk and a user has many desks.
