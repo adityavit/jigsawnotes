@@ -1,1 +1,5 @@
-
+JigsawNotes is an written on play framework.
+To store the daily common use sticky-notes on the cloud.
+Every Note is linked through a desk and a user has many desks.
+A note and a Desk can be shared with another user making with read and write permission so that other user can also contribute to your notes.
+A note can be a text,image or an embedded video.
