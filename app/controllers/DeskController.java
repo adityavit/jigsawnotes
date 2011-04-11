@@ -1,7 +1,9 @@
 package controllers;
 
-import models.User;
+import models.*;
 import play.mvc.Before;
+import com.google.gson.*;
+
 
 public class DeskController extends Application {
     
@@ -19,6 +21,30 @@ public class DeskController extends Application {
             Application.index();
         }
         render(user);
+    }
+    
+    public static void deskData(){
+        User user = connected();
+        if(user != null){
+            renderJSON(user.getDesksJsonObj());
+        }else{
+            Application.index();
+        }
+    }
+    
+    public static void deskNotesData(Long id) {
+        User user = connected();
+        if (id == null) {
+          
+        } else {
+            if (user != null) {
+                Desk requestedDesk = Desk.find("deskUser = ? and id = ?", user, id).first();
+                renderJSON(requestedDesk.getDeskNoteData());
+            } else {
+                Application.index();
+            }
+        }
+
     }
     
     

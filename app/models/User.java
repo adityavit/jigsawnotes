@@ -44,6 +44,19 @@ public class User extends Model {
         return find("byUserName",userName).first();
     }
     
+    public Map getDesksJsonObj(){
+        Map <String,Object> userDesk = new HashMap();
+        ArrayList desks = new ArrayList();
+        Iterator <Desk> desksItr = this.desks.iterator();
+        while(desksItr.hasNext()){
+            DeskJson desk = new DeskJson(desksItr.next());
+            desks.add(desk);
+        }
+        userDesk.put("userName", this.userName);
+        userDesk.put("userDesks", desks);
+        return userDesk;
+    }
+    
     public String toString(){
         return "User("+this.userName+")";
     }

@@ -3,16 +3,19 @@
 #{set 'moreStyles'}
        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/desk.css'}">
 #{/set}
+#{set 'moreScripts'}
+       <script src="@{'/public/javascripts/deskContext.js'}" type="text/javascript" charset="utf-8"></script>
+#{/set}
 
   <div class="userDesks" id="Desk_${user.userName}">
      <div class="deskContainer" id="deskContainer">
        #{if user.desks != null}
        #{list user.desks, as:'desk'}
-      <div class="deskDetails ${desk_isFirst?'selectedDesk':'unSelectedDesk'}" id="desk_${desk.id}">
-        <span class="deskName" id="deskName_${desk.id}">
+      <div class="deskDetails ${desk_isFirst?'selectedDesk':'unSelectedDesk'}" id="desk_${desk.id-1}">
+        <span class="deskName" id="deskName_${desk.id-1}">
            ${desk.deskName}
         </span>
-        <span class="deskDescription" id="deskDescription_${desk.id}">
+        <span class="deskDescription" id="deskDescription_${desk.id-1}">
            ${desk.deskDescription}
         </span>
      </div>
@@ -22,20 +25,20 @@
    <div class="notesContainer" id="notesContainer">
    #{if user.desks != null}
    #{list user.desks, as:'desk'}
-     <div class="deskNotes ${desk_isFirst?'selectedNoteContainer':'unSelectedNoteContainer'}" id="Desk_${desk.id}">
+     <div class="deskNotes ${desk_isFirst?'selectedNoteContainer':'unSelectedNoteContainer'}" id="deskBlock_${desk.id-1}">
        #{if desk.notes != null}
    	   #{list desk.notes, as:'note'}
-   	    <div class="deskNote" id="noteContainer_${desk.id}_${note.id}">
+   	    <div class="deskNote" id="noteContainer_${desk.id-1}_${note.id-1}">
    	       <div class="noteHeader">
-   	 	      <span class="noteTitle" id="noteTitle_${desk.id}_${note.id}">
+   	 	      <span class="noteTitle" id="noteTitle_${desk.id-1}_${note.id-1}">
    	 	        ${note.title}
    	 	       </span>
    	 	       <span class="noteCloseButton"></span>
    	      </div>
-   	 	  <div class="noteBody" id="noteBody_${desk.id}_${note.id}">
+   	 	  <div class="noteBody" id="noteBody_${desk.id-1}_${note.id-1}">
    	 	     ${note.noteBody}
    	 	  </div>
-   	 	  <div class="noteTimeStamp" id="noteTimeStamp_${desk.id}_${note.id}">
+   	 	  <div class="noteTimeStamp" id="noteTimeStamp_${desk.id-1}_${note.id-1}">
    	 	   Created at:- ${note.noteTimeStamp}
    	 	  </div>
    	  </div>
@@ -46,3 +49,24 @@
    #{/if}
    </div>
 </div>
+
+<script type="text/javascript">
+  var deskState = new Object();
+  deskState.desks = new Array();
+  #{if user.desks != null}
+  #{list user.desks, as:'desk'}
+  deskState.desks[${desk_index-1}] = new Object();
+  deskState.desks[${desk_index-1}]["deskName"] = "${desk.deskName}";
+  deskState.desks[${desk_index-1}]["deskDescription"] = "${desk.deskDescription}";
+  deskState.desks[${desk_index-1}]["deskNotes"] = new Array();
+  #{if desk.notes != null}
+  #{list desk.notes, as:'note'}
+  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}] = new Object();
+  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}]["noteTitle"] = "${note.title}";
+  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}]["noteBody"] = "${note.noteBody}";
+  deskState.desks[${desk_index-1}]["deskNotes"][${note_index-1}]["noteTimeStamp"] = "${note.noteTimeStamp}";
+  #{/list}
+  #{/if}
+  #{/list}
+  #{/if}
+</script>
