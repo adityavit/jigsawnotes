@@ -39,6 +39,8 @@ var userDesk = new (function(){
         this.m_events["notesUpdated"] = "CurrentDeskNotesUpdatedEvent"; //Event when the Note of current Desk is updated.
         this.m_events["switchUserDesk"] = "SwitchUserDesk";// Event when a user selects a new desk through DeskUIWidget.
         this.m_events["noteUIInstancesUpdated"] = "NotesUIInstancesUpdated";
+        this.m_events["addNewNote"] = "AddNewNote"; //Event fired when a user clicks on add New Note Button.
+        this.m_events["addNewNoteInstance"] = "AddNewNoteUIInstances" //Fired When the data is added to the new note.
     }
     
     /**
@@ -63,6 +65,13 @@ var userDesk = new (function(){
         $(document).bind(this.getEventName("deskUpdated"), {
             subObj: this
         }, this.onDeskUpdate);
+        $('#newNoteBtn').bind('click', {
+            subObj: this
+        }, this.addNewNoteHandler);
+    }
+    
+    this.addNewNoteHandler = function(event){
+       jQuery.event.trigger(event.data.subObj.getEventName("addNewNote"));
     }
 })();
 

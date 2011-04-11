@@ -96,3 +96,16 @@
 .hideNoteClass {
     display: none;
 }
+
+.noteBody{
+	height :200px;
+	width:180px;
+}
+.noteTitle{
+	width:180px;
+	height:20px;
+}
+.noteHeader{
+	width:180px;
+	height:20px;
+}

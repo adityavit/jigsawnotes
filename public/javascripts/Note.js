@@ -11,11 +11,20 @@ var NoteUIWidget = function(noteData, deskNo){
             subObj: this
         }, this.hideNoteWidget);
     }
-    
-    this.updateNoteWidget = function(event){
-        event.data.subObj.loadUI();
-        event.data.subObj.refreshUI(); 
-        event.data.subObj.show();
+    /**
+     * To make the update of a particular desk Note.noteId may passed 
+     * @param {Object} event
+     * @param {Object} triggerData
+     */
+    this.updateNoteWidget = function(event, triggerData){
+        if (triggerData && triggerData["noteId"] && triggerData["noteId"] != event.data.subObj.m_noteDataObj["id"]) {
+            return;
+        }
+        else {
+            event.data.subObj.loadUI();
+            event.data.subObj.refreshUI();
+            event.data.subObj.show();
+        }
     }
 
     this.loadUI = function(){

@@ -22,6 +22,9 @@ NoteContext = function(initParams){
         $(document).bind(this.m_userDeskController.getEventName("noteUIInstancesUpdated"), {
             subObj: this
         }, this.updateNoteInstances);
+        $(document).bind(this.m_userDeskController.getEventName("addNewNote"), {
+            subObj: this
+        }, this.addNewNoteEventHandler);
     }
     
     this.start = function(event){
@@ -50,7 +53,8 @@ NoteContext = function(initParams){
         }
     }
     
-    this.parseNotesData = function(notesObj, textStatus, jqXHR){
+    this.parseNotesData = function(notesObject, textStatus, jqXHR){
+        var notesObj = notesObject["response"];
         var notesObjDeskId = notesObj["deskId"];
         var notesData = notesObj["deskNotes"];
         if (!this.m_deskNotes[notesObjDeskId]) {
@@ -63,12 +67,49 @@ NoteContext = function(initParams){
         jQuery.event.trigger(this.m_userDeskController.getEventName("notesUpdated"));
     }
 
-    this.updateNoteInstances = function(event){
-       var selectedDeskNo = event.data.subObj.m_deskContext.getSelectedDeskNumber();
-       jQuery.event.trigger("updateNoteUIWidget"+selectedDeskNo);
+    this.updateNoteInstances = function(event,trigerData){
+       var selectedDeskNo = trigerData["deskNo"];
+       jQuery.event.trigger("updateNoteUIWidget"+selectedDeskNo,trigerData);
     }
     this.selectedDeskNotesData = function(){
         return this.m_currentNotesData;
     }
     
+    this.addNewNoteEventHandler = function(event){
+        event.data.subObj.addNewNote();
+    }
+    this.addNewNote = function(){
+        var selectedDeskId = this.m_currentDesk["deskId"];
+        var addNoteUrl = '/note/new/' + selectedDeskId;
+        $.ajax({
+            url: addNoteUrl,
+            dataType: 'json',
+            success: this.addNewNoteData,
+            context: this
+        });
+    }
+
+    this.addNewNoteData = function(notesObject, textStatus, jqXHR){
+        if (notesObject["status"] == "success") {
+            noteObj = notesObject["response"];
+            var selectedDeskId = this.m_currentDesk["deskId"];
+            var notesObjDeskId = noteObj["deskId"];
+            if (selectedDeskId == notesObjDeskId) {
+                this.m_currentNotesData.push(noteObj["deskNote"]);
+            }
+            else 
+                if (this.m_deskNotes[notesObjDeskId]) {
+                    this.m_deskNotes[notesObjDeskId].push(noteObj["deskNote"]);
+                }
+                else {
+                    this.m_deskNotes[notesObjDeskId] = [];
+                    this.m_deskNotes[notesObjDeskId].push(noteObj["deskNote"]);
+                }
+           
+         jQuery.event.trigger(this.m_userDeskController.getEventName("addNewNoteInstance"),{"noteObj":noteObj["deskNote"]});
+        }
+        else {
+            alert("New note cannot be added currently");
+        }
+    }
 }

@@ -16,14 +16,24 @@ NotesController = function(initParams){
         $(document).bind(this.m_userDeskController.getEventName("notesUpdated"), {
             subObj: this
         }, this.updateNoteController);
+        $(document).bind(this.m_userDeskController.getEventName("addNewNoteInstance"), {
+            subObj: this
+        }, this.updateNoteController);
     }
-    this.updateNoteController = function(event){
-        event.data.subObj.createNoteUIWidgetInstances();
+    this.updateNoteController = function(event,triggerData){
+        event.data.subObj.createNoteUIWidgetInstances(triggerData);
     }
 
-    this.createNoteUIWidgetInstances = function(){
-        var selectedDeskNotesObj = this.m_noteContext.selectedDeskNotesData();
+    this.createNoteUIWidgetInstances = function(triggerData){
+        var selectedDeskNotesObj;
+        if (triggerData && triggerData["noteObj"]) {
+            selectedDeskNotesObj = triggerData["noteObj"];
+        }
+        else {
+            selectedDeskNotesObj = this.m_noteContext.selectedDeskNotesData();
+        }
         var selectedDeskNo = this.m_deskContext.getSelectedDeskNumber();
+        
         if (!this.m_notesUIInstances[selectedDeskNo]) {
             var noteUIInstanceArr = [];
             for (note in selectedDeskNotesObj) {
@@ -31,7 +41,24 @@ NotesController = function(initParams){
                 noteUIInstanceArr.push(noteInstance);
             }
             this.m_notesUIInstances[selectedDeskNo] = noteUIInstanceArr;
+            jQuery.event.trigger(this.m_userDeskController.getEventName("noteUIInstancesUpdated"), {
+                "deskNo": selectedDeskNo
+            });
         }
-        jQuery.event.trigger(this.m_userDeskController.getEventName("noteUIInstancesUpdated"));
+        else 
+            if (triggerData && triggerData["noteObj"]) {
+                var noteInstance = new NoteUIWidget(selectedDeskNotesObj, selectedDeskNo);
+                this.m_notesUIInstances[selectedDeskNo].push(noteInstance);
+                jQuery.event.trigger(this.m_userDeskController.getEventName("noteUIInstancesUpdated"), {
+                    "deskNo": selectedDeskNo,
+                    "noteId": noteInstance["id"]
+                });
+            }
+            else {
+                jQuery.event.trigger(this.m_userDeskController.getEventName("noteUIInstancesUpdated"), {
+                    "deskNo": selectedDeskNo
+                });
+            }
     }
+   
 }

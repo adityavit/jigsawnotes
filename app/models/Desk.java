@@ -2,7 +2,7 @@ package models;
 
 import play.db.jpa.Model;
 import java.util.*;
-
+import utilities.JsonMapCreator;
 import javax.persistence.*;
 
 @Entity
@@ -34,23 +34,27 @@ public class Desk extends Model {
         this.save();
     }
     
-    public NoteJson addNewDeskNote(){
+    public Map addNewDeskNote(){
+        Map responseData;
+        try{
         Note newNote = new Note(this);
         this.notes.add(newNote);
         this.save();
-        NoteJson newNoteJson = new NoteJson(newNote);
-        return newNoteJson;
-    }
-    public Map getDeskNoteData(){
-        Map <String,Object> deskNoteData = new HashMap();
-        deskNoteData.put("deskId", this.id.toString());
-        ArrayList notes = new ArrayList();
-        Iterator <Note> noteItr = this.notes.iterator();
-        while(noteItr.hasNext()){
-            NoteJson noteJsonObj = new NoteJson(noteItr.next());
-            notes.add(noteJsonObj);
+        DeskJson deskNotesData = new DeskJson(this, newNote);
+        responseData = JsonMapCreator.successJsonResponse(deskNotesData);
+        }catch(Exception e){
+            responseData = JsonMapCreator.failureJsonResponse(e);
         }
-        deskNoteData.put("deskNotes", notes);
-        return deskNoteData;
+        return responseData;
+    }
+    public Map getDeskNoteData() {
+        Map responseData;
+        try {
+            DeskJson deskNotesData = new DeskJson(this, this.notes);
+            responseData = JsonMapCreator.successJsonResponse(deskNotesData);
+        } catch (Exception e) {
+            responseData = JsonMapCreator.failureJsonResponse(e);
+        }
+        return responseData;
     }
 }

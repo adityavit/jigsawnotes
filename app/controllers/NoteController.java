@@ -21,8 +21,7 @@ public class NoteController extends Application {
         } else {
             if (user != null) {
                 Desk selectedDesk = Desk.find("deskUser = ? and id = ?", user, id).first();
-                NoteJson newNoteObj = selectedDesk.addNewDeskNote();
-                renderJSON(newNoteObj);
+                renderJSON(selectedDesk.addNewDeskNote());
             }
         }
     }
